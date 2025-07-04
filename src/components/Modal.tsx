@@ -53,11 +53,20 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, launch }) => {
       aria-modal="true"
       aria-labelledby="modal-title"
     >
-      <div className="modal-content">
-        <div className="modal-header">
-          <h2 id="modal-title" className="modal-title">
-            {launch.mission}
-          </h2>
+      <div className="modal-content redesigned-modal">
+        <div className="modal-header redesigned-modal-header">
+          <div className="modal-patch-section">
+            {launch.links.patch && launch.links.patch.small && (
+              <img src={launch.links.patch.small} alt="Mission Patch" className="modal-mission-patch" />
+            )}
+          </div>
+          <div className="modal-title-section">
+            <h2 id="modal-title" className="modal-title redesigned-modal-title">
+              {launch.mission}
+            </h2>
+            <div className="modal-rocket-name">{launch.rocket}</div>
+            <span className={`status-badge ${getStatusClass(launch.success, launch.upcoming)}`}>{getStatusText(launch.success, launch.upcoming)}</span>
+          </div>
           <button
             className="modal-close"
             onClick={onClose}
@@ -66,106 +75,28 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, launch }) => {
             ×
           </button>
         </div>
-        
-        <div className="modal-body">
-          <div className="launch-details">
-            <div className="detail-row">
-              <span className="detail-label">Flight Number:</span>
-              <span className="detail-value">{launch.number}</span>
-            </div>
-            
-            <div className="detail-row">
-              <span className="detail-label">Launch Date:</span>
-              <span className="detail-value">{formatDate(launch.date)}</span>
-            </div>
-            
-            <div className="detail-row">
-              <span className="detail-label">Rocket:</span>
-              <span className="detail-value">{launch.rocket}</span>
-            </div>
-            
-            <div className="detail-row">
-              <span className="detail-label">Launch Site:</span>
-              <span className="detail-value">{launch.launchpad}</span>
-            </div>
-            
-            <div className="detail-row">
-              <span className="detail-label">Status:</span>
-              <span className={`detail-value status-badge ${getStatusClass(launch.success, launch.upcoming)}`}>
-                {getStatusText(launch.success, launch.upcoming)}
-              </span>
-            </div>
-            
-            {launch.details && (
-              <div className="detail-row details-section">
-                <span className="detail-label">Mission Details:</span>
-                <p className="detail-value mission-description">
-                  {launch.details}
-                </p>
-              </div>
-            )}
-            
-            {launch.cores && launch.cores.length > 0 && (
-              <div className="detail-row">
-                <span className="detail-label">Core Information:</span>
-                <div className="cores-info">
-                  {launch.cores.map((core, index) => (
-                    <div key={index} className="core-detail">
-                      <span>Core #{index + 1}: </span>
-                      <span>
-                        {core.reused ? 'Reused' : 'New'} | 
-                        Landing: {core.landing_success ? 'Success' : core.landing_attempt ? 'Failed' : 'Not attempted'}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            
-            {launch.links.webcast && (
-              <div className="detail-row">
-                <span className="detail-label">Webcast:</span>
-                <a 
-                  href={launch.links.webcast} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="detail-link"
-                >
-                  Watch on YouTube
-                </a>
-              </div>
-            )}
-            
-            {launch.links.article && (
-              <div className="detail-row">
-                <span className="detail-label">Article:</span>
-                <a 
-                  href={launch.links.article} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="detail-link"
-                >
-                  Read More
-                </a>
-              </div>
-            )}
-            
+        <div className="modal-body redesigned-modal-body">
+          <div className="modal-description-section">
+            {launch.details && <p className="modal-description">{launch.details}</p>}
             {launch.links.wikipedia && (
-              <div className="detail-row">
-                <span className="detail-label">Wikipedia:</span>
-                <a 
-                  href={launch.links.wikipedia} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="detail-link"
-                >
-                  Wikipedia Page
-                </a>
-              </div>
+              <a href={launch.links.wikipedia} target="_blank" rel="noopener noreferrer" className="modal-wikipedia-link">
+                Wikipedia
+              </a>
             )}
           </div>
+          <div className="modal-details-grid">
+            <div className="modal-detail-row"><span className="modal-detail-label">Flight Number</span><span className="modal-detail-value">{launch.number}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Mission Name</span><span className="modal-detail-value">{launch.mission}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Rocket Type</span><span className="modal-detail-value">{launch.rocketType || '-'}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Rocket Name</span><span className="modal-detail-value">{launch.rocket}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Manufacturer</span><span className="modal-detail-value">{launch.manufacturer || 'SpaceX'}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Nationality</span><span className="modal-detail-value">{launch.nationality || 'SpaceX'}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Launch Date</span><span className="modal-detail-value">{formatDate(launch.date)}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Payload Type</span><span className="modal-detail-value">{launch.payloadType || '-'}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Orbit</span><span className="modal-detail-value">{launch.orbit || '-'}</span></div>
+            <div className="modal-detail-row"><span className="modal-detail-label">Launch Site</span><span className="modal-detail-value">{launch.launchpad}</span></div>
+          </div>
         </div>
-        
         <div className="modal-footer">
           <button className="modal-btn secondary" onClick={onClose}>
             Close

@@ -12,6 +12,11 @@ export interface LaunchData {
   links: LaunchLinks;
   cores: Core[];
   payloads: string[];
+  rocketType?: string;
+  manufacturer?: string;
+  nationality?: string;
+  payloadType?: string;
+  orbit?: string;
 }
 
 export interface LaunchLinks {
@@ -229,8 +234,13 @@ export interface FilterProps {
   currentFilter: FilterOptions;
 }
 
+export interface DateRange {
+  startDate: Date | string;
+  endDate: Date | string;
+}
+
 export interface FilterOptions {
-  dateRange: string;
+  dateRange: string | DateRange;
   status: string;
   searchTerm: string;
 }
@@ -262,8 +272,3 @@ export interface HeaderProps {
 
 // Utility Types
 export type LaunchStatus = 'success' | 'failed' | 'upcoming' | 'unknown';
-
-export interface DateRange {
-  startDate: string;
-  endDate: string;
-}
