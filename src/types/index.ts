@@ -240,16 +240,15 @@ export interface DateRange {
 }
 
 export interface FilterOptions {
-  dateRange: string | DateRange;
-  status: string;
-  searchTerm: string;
+  dateRange?: any;
+  status?: string;
+  searchTerm?: string;
 }
 
 export interface TableProps {
-  launches: LaunchData[];
+  filteredLaunches: LaunchData[];
   onRowClick: (launch: LaunchData) => void;
   loading: boolean;
-  error: string | null;
 }
 
 export interface PaginationProps {

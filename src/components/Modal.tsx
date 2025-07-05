@@ -54,23 +54,28 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, launch }) => {
       aria-labelledby="modal-title"
     >
       <div className="modal-content redesigned-modal">
-        <div className="modal-header redesigned-modal-header">
-          <div className="modal-patch-section">
+        <div className="redesigned-modal-header" style={{flexDirection: 'row', alignItems: 'center', padding: '2rem 2rem 1rem 2rem', gap: '1.5rem'}}>
+          <div className="modal-patch-section" style={{marginBottom: 0}}>
             {launch.links.patch && launch.links.patch.small && (
               <img src={launch.links.patch.small} alt="Mission Patch" className="modal-mission-patch" />
             )}
           </div>
-          <div className="modal-title-section">
-            <h2 id="modal-title" className="modal-title redesigned-modal-title">
-              {launch.mission}
-            </h2>
-            <div className="modal-rocket-name">{launch.rocket}</div>
-            <span className={`status-badge ${getStatusClass(launch.success, launch.upcoming)}`}>{getStatusText(launch.success, launch.upcoming)}</span>
+          <div className="modal-title-section" style={{alignItems: 'flex-start', flex: 1, gap: '0.5rem'}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
+              <h2 id="modal-title" className="modal-title redesigned-modal-title" style={{margin: 0, fontSize: '1.25rem', fontWeight: 700, textAlign: 'left'}}>
+                {launch.mission}
+              </h2>
+              <span className={`status-badge ${getStatusClass(launch.success, launch.upcoming)}`}>{getStatusText(launch.success, launch.upcoming)}</span>
+            </div>
+            <div className="modal-rocket-name" style={{fontSize: '0.95rem', color: '#888', marginBottom: 0}}>{launch.rocket}</div>
           </div>
           <button
             className="modal-close"
             onClick={onClose}
             aria-label="Close modal"
+            style={{position: 'absolute', top: 18, right: 18, fontSize: '1.5rem', color: '#888', background: 'none', border: 'none', cursor: 'pointer', transition: 'color 0.2s'}}
+            onMouseOver={e => (e.currentTarget.style.color = '#222')}
+            onMouseOut={e => (e.currentTarget.style.color = '#888')}
           >
             ×
           </button>
