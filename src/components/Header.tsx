@@ -20,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           />
         </div>
       </div>
+      <div className="header-accent-bar" />
     </header>
   );
 };

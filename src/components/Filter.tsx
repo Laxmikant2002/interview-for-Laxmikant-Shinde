@@ -34,37 +34,57 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange, currentFilter }) => {
   };
 
   return (
-    <div className="filter-container">
-      <div className="filter-group">
-        <label className="filter-label">Date Range:</label>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+    <div className="filters-wrapper">
+      <div className="filter-container">
+        <div className="filter-group">
+          <label className="filter-label">📅 Date Range:</label>
+          <div className="date-range-inputs">
+            <input
+              type="date"
+              value={formatDateForInput(dateRange.startDate)}
+              onChange={(e) => handleDateChange('start', e.target.value)}
+              className="filter-input date-input"
+            />
+            <span className="date-separator">to</span>
+            <input
+              type="date"
+              value={formatDateForInput(dateRange.endDate)}
+              onChange={(e) => handleDateChange('end', e.target.value)}
+              className="filter-input date-input"
+            />
+          </div>
+        </div>
+        
+        <div className="filter-group">
+          <label htmlFor="search" className="filter-label">
+            🔍 Search Mission:
+          </label>
           <input
-            type="date"
-            value={formatDateForInput(dateRange.startDate)}
-            onChange={(e) => handleDateChange('start', e.target.value)}
-            className="filter-input"
-          />
-          <span>to</span>
-          <input
-            type="date"
-            value={formatDateForInput(dateRange.endDate)}
-            onChange={(e) => handleDateChange('end', e.target.value)}
-            className="filter-input"
+            id="search"
+            type="text"
+            value={currentFilter.searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search by mission name..."
+            className="filter-input search-input"
           />
         </div>
-      </div>
-      <div className="filter-group">
-        <label htmlFor="search" className="filter-label">
-          Search Mission:
-        </label>
-        <input
-          id="search"
-          type="text"
-          value={currentFilter.searchTerm}
-          onChange={handleSearchChange}
-          placeholder="Search by mission name..."
-          className="filter-input"
-        />
+        
+        <div className="filter-group">
+          <label className="filter-label">🚀 Status:</label>
+          <select 
+            className="filter-select status-select"
+            value={currentFilter.status || 'all'}
+            onChange={(e) => onFilterChange({
+              ...currentFilter,
+              status: e.target.value === 'all' ? '' : e.target.value
+            })}
+          >
+            <option value="all">All Statuses</option>
+            <option value="success">Success</option>
+            <option value="failed">Failed</option>
+            <option value="upcoming">Upcoming</option>
+          </select>
+        </div>
       </div>
     </div>
   );
