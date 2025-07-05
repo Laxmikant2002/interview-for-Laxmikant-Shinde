@@ -317,7 +317,7 @@ html {
   box-shadow: 0 1px 3px rgba(107, 114, 128, 0.1); /* Light shadow for unknown status */
 }
 
-/* Loading and Error States */
+/* Loading and Error States - Enhanced */
 .loading-spinner {
   display: flex;
   flex-direction: column;
@@ -326,6 +326,7 @@ html {
   height: 320px;
   min-height: 200px;
   width: 100%;
+  gap: 1rem;
 }
 
 .spinner {
@@ -336,6 +337,13 @@ html {
   border-radius: 50%;
   animation: spin 1s linear infinite;
   background: transparent;
+}
+
+.loading-spinner p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
 }
 
 @keyframes spin {
@@ -352,6 +360,31 @@ html {
   text-align: center;
   padding: 4rem 2rem;
   color: #666;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.no-data {
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 2px dashed #d1d5db;
+  margin: 2rem 0;
+}
+
+.no-data::before {
+  content: "🚀";
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.error-message::before {
+  content: "⚠️";
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
 }
 
 .error-message button {
@@ -595,7 +628,7 @@ html {
   background-color: #5a6268;
 }
 
-/* Responsive Design */
+/* Enhanced Mobile Table Responsiveness */
 @media (max-width: 768px) {
   .header-container,
   .dashboard-container {
@@ -617,16 +650,41 @@ html {
 
   .table-wrapper {
     font-size: 0.85rem;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .launches-table {
+    min-width: 800px;
   }
 
   .launches-table th,
   .launches-table td {
-    padding: 0.75rem 0.5rem;
+    padding: 0.9rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .launches-table th {
+    font-size: 0.7rem;
+    padding: 1rem 0.6rem;
+  }
+
+  .status-badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.8rem;
+    min-width: 70px;
   }
 
   .pagination-container {
     flex-direction: column;
     text-align: center;
+    gap: 1rem;
+  }
+
+  .pagination-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 0.8rem;
   }
 
   .modal-backdrop {
@@ -635,6 +693,7 @@ html {
 
   .modal-content {
     max-height: 95vh;
+    border-radius: 16px;
   }
 
   .modal-header,
@@ -651,10 +710,25 @@ html {
 
   .detail-label {
     min-width: auto;
+    font-size: 0.8rem;
+  }
+
+  .loading-spinner {
+    height: 250px;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+  }
+
+  .no-data, .error-message {
+    padding: 3rem 1.5rem;
     font-size: 0.9rem;
   }
 }
 
+/* Very Small Mobile Optimization */
 @media (max-width: 480px) {
   .spacex-logo {
     height: 32px;
@@ -664,24 +738,79 @@ html {
     font-size: 1rem;
   }
 
+  .header {
+    padding: 2rem 0 0.5rem 0;
+  }
+
   .launches-table {
-    font-size: 0.8rem;
+    min-width: 650px;
+    font-size: 0.75rem;
   }
 
   .launches-table th,
   .launches-table td {
-    padding: 0.5rem 0.25rem;
+    padding: 0.8rem 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .launches-table th {
+    font-size: 0.65rem;
+    letter-spacing: 0.3px;
   }
 
   .status-badge {
-    font-size: 0.75rem;
+    font-size: 0.6rem;
     padding: 0.25rem 0.6rem;
+    min-width: 60px;
   }
 
   .pagination-btn {
-    padding: 0.5rem 0.75rem;
+    width: 36px;
+    height: 36px;
+    font-size: 0.75rem;
+    margin: 0 1px;
+  }
+
+  .pagination {
+    gap: 0.4rem;
+  }
+
+  .modal-content {
+    margin: 0.5rem;
+    max-height: 98vh;
+    border-radius: 12px;
+  }
+
+  .modal-header {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1rem;
+  }
+
+  .loading-spinner {
+    height: 200px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+
+  .no-data, .error-message {
+    padding: 2rem 1rem;
     font-size: 0.85rem;
-    min-width: 36px;
+  }
+
+  .results-summary {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
   }
 }
 
